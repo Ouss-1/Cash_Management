@@ -1,0 +1,49 @@
+name: cash_management
+description: A beautiful money management app with dotted design patterns
+publish_to: 'none'
+version: 3.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # Local Database (web-compatible)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # Charts
+  fl_chart: ^0.65.0
+  
+  # UI & Icons
+  cupertino_icons: ^1.0.6
+  
+  # Utilities
+  intl: ^0.18.1
+  uuid: ^4.2.1
+  shared_preferences: ^2.2.2
+  percent_indicator: ^4.2.3
+  table_calendar: ^3.0.9
+  csv: ^5.1.1
+  pdf: ^3.10.8
+  printing: ^5.11.1
+  path_provider: ^2.1.2
+  share_plus: ^7.2.1
+  file_picker: ^6.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  
+  # Uncomment to add assets
+  # assets:
+  #   - assets/images/
