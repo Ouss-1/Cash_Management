@@ -33,18 +33,29 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build iOS No-Sign (for testing/IPA packaging)
-        run: flutter build ios --release --no-codesign
+      - name: Build Flutter iOS Config
+        run: flutter build ios --release --config-only
 
-      - name: Compress Build Artifact
+      - name: Build iOS App with Xcode (No Code Signing Required)
         run: |
-          cd build/ios/iphoneos
+          xcodebuild -workspace ios/Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -derivedDataPath build/ios_derived \
+                     CODE_SIGN_IDENTITY="" \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGNING_ALLOWED=NO
+
+      - name: Package into IPA
+        run: |
+          cd build/ios_derived/Build/Products/Release-iphoneos
           mkdir -p Payload
-          mv Runner.app Payload/
+          cp -r Runner.app Payload/
           zip -r Cash_Management_v3.ipa Payload
 
       - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Cash_Management_v3_IPA
-          path: build/ios/iphoneos/Cash_Management_v3.ipa
+          path: build/ios_derived/Build/Products/Release-iphoneos/Cash_Management_v3.ipa
