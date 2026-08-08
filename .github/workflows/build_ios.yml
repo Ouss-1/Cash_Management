@@ -34,7 +34,7 @@ jobs:
         run: flutter test
 
       - name: Build Flutter iOS Config
-        run: flutter build ios --release --config-only
+        run: flutter build ios --release --no-codesign --config-only
 
       - name: Build iOS App with Xcode (No Code Signing Required)
         run: |
